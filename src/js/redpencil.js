@@ -1,11 +1,11 @@
 var RedPencil = (function() {
   var item1 = {
-    name: "Tshirt",  //item name
-    price: 22,      //item price in $
-    rpp: "N",       //under red prencil promotion (Y/N)
-    sale: "N",      //on sale (Y/N)
-    percent: 0      //percent discounted
-
+    name: "Tshirt",          //item name
+    original-price: 22,      //item price in $
+    current-price: 22,       //item price in $
+    rpp: "N",                //under red prencil promotion (Y/N)
+    sale: "N",               //on sale (Y/N)
+    percent: 0               //percent discounted
   };
   return {
     item1: item1
