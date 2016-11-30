@@ -1,5 +1,5 @@
 describe("Red Pencil Promotions", function() {
   it("should be defined", function () {
-    expect(RedPencil.pencil).toBeDefined();
+    expect(RedPencil.item1).toBeDefined();
   });
 });

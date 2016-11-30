@@ -1,7 +1,7 @@
 var RedPencil = (function() {
-  var pencil = "red";
+  var item1 = {};
   return {
-    pencil: pencil
+    item1: item1
   };
 })();
 
