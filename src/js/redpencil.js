@@ -12,9 +12,14 @@ var RedPencil = (function() {
     item.currentprice -= item.currentprice * percent * 0.01;
   }
 
+  function getTotalPercentOff(item) {
+    item.percent = (item.originalprice - item.currentprice) / (item.originalprice * 0.01)
+  }
+
   return {
     item1: item1,
-    getNewPrice: getNewPrice
+    getNewPrice: getNewPrice,
+    getTotalPercentOff: getTotalPercentOff
   };
 })();
 
