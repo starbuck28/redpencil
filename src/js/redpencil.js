@@ -1,15 +1,15 @@
 var RedPencil = (function() {
   var item1 = {
     name: "Tshirt",          //item name
-    originalprice: 22,      //item price in $
-    currentprice: 22,       //item price in $
+    originalprice: 20,      //item price in $
+    currentprice: 20,       //item price in $
     rpp: "N",                //under red prencil promotion (Y/N)
     sale: "N",               //on sale (Y/N)
     percent: 0               //percent discounted
   };
 
   function getNewPrice(item, percent) {
-  return item.currentprice - item.currentprice * percent * 0.01;
+    item.currentprice -= item.currentprice * percent * 0.01;
   }
 
   return {
@@ -43,6 +43,6 @@ var RedPencil = (function() {
 
 //Need way to reduce item price
 //Need way to increase item price
-//Need way to calculate price reduction percentage
+//Need way to calculate/store new price
 //Need way to track price stability
 //Need way to countdown RPP
