@@ -26,4 +26,15 @@ describe("Red Pencil Promotions", function() {
     RedPencil.startOrStopSale(RedPencil.item1);
     expect(RedPencil.item1.sale).toEqual('N');
   });
+  it("should be able to determine if an item is on sale between 5 and 30%", function() {
+    RedPencil.item1.percent = 0;
+    RedPencil.isItARedPencilPromotion(RedPencil.item1);
+    expect(RedPencil.item1.rpp).toEqual('N');
+    RedPencil.item1.percent = 5;
+    RedPencil.isItARedPencilPromotion(RedPencil.item1);
+    expect(RedPencil.item1.rpp).toEqual('Y');
+    RedPencil.item1.percent = 45;
+    RedPencil.isItARedPencilPromotion(RedPencil.item1);
+    expect(RedPencil.item1.rpp).toEqual('N');
+  });
 });

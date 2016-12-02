@@ -24,11 +24,20 @@ var RedPencil = (function() {
     }
   }
 
+  function isItARedPencilPromotion(item) {
+    if (item.percent >= 5 && item.percent <= 30) {
+      item.rpp = "Y";
+    } else {
+      item.rpp = "N";
+    }
+  }
+
   return {
     item1: item1,
     getNewPrice: getNewPrice,
     getTotalPercentOff: getTotalPercentOff,
-    startOrStopSale: startOrStopSale
+    startOrStopSale: startOrStopSale,
+    isItARedPencilPromotion: isItARedPencilPromotion
   };
 })();
 
