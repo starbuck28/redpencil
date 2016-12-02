@@ -16,10 +16,19 @@ var RedPencil = (function() {
     item.percent = (item.originalprice - item.currentprice) / (item.originalprice * 0.01)
   }
 
+  function startOrStopSale(item) {
+    if (item.percent > 0) {
+      item.sale = 'Y';
+    } else {
+      item.sale = 'N';
+    }
+  }
+
   return {
     item1: item1,
     getNewPrice: getNewPrice,
-    getTotalPercentOff: getTotalPercentOff
+    getTotalPercentOff: getTotalPercentOff,
+    startOrStopSale: startOrStopSale
   };
 })();
 

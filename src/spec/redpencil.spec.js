@@ -18,4 +18,12 @@ describe("Red Pencil Promotions", function() {
     RedPencil.getTotalPercentOff(RedPencil.item1);
     expect(RedPencil.item1.percent).toEqual(25);
   });
+  it("should be able to modify item sale key value pair based on item percent value", function() {
+    RedPencil.item1.percent = 25;
+    RedPencil.startOrStopSale(RedPencil.item1);
+    expect(RedPencil.item1.sale).toEqual('Y');
+    RedPencil.item1.percent = 0;
+    RedPencil.startOrStopSale(RedPencil.item1);
+    expect(RedPencil.item1.sale).toEqual('N');
+  });
 });
