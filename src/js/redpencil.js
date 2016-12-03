@@ -5,7 +5,8 @@ var RedPencil = (function() {
     currentprice: 20,       //item price in $
     rpp: "N",                //under red prencil promotion (Y/N)
     sale: "N",               //on sale (Y/N)
-    percent: 0               //percent discounted
+    percent: 0,
+    daysStable: 0               //percent discounted
   };
 
   function getNewPrice(item, percent) {
