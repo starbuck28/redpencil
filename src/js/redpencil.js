@@ -12,17 +12,17 @@ var RedPencil = (function() {
     st: 0,
     //Resets # of days price is stable
     resetDaysStable: function() {
-      this.daysStable = -1;
+      item1.daysStable = -1;
     },
     //A counter that increases the number of days an item's price is stable every 24h
     priceStablilityCounter: function() {
-      this.daysStable += 1;
+      item1.daysStable += 1;
       //Recursive method
-      this.st = setTimeout(priceStablilityCounter, 86400000);
+      item1.st = setTimeout(item1.priceStablilityCounter, 86400000);
       },
     //Stops priceStablilityCounter
     resetDayCounter: function() {
-      clearTimeout(this.st);
+      clearTimeout(item1.st);
     }
   };
 
