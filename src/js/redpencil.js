@@ -42,7 +42,7 @@ var RedPencil = (function() {
       //Calculates total percent off
       this.getTotalPercentOff(item);
       //Checks to see if it qualifies for RPP
-      RedPencil.isItARedPencilPromotion(item);
+      this.isItARedPencilPromotion(item);
   }
 
   //Calculates total percent off original price

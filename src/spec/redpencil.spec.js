@@ -55,7 +55,13 @@ describe("Red Pencil Promotions", function() {
     expect(RedPencil.item1.currentprice).toEqual(16);
     expect(RedPencil.item1.percent).toEqual(20);
     expect(RedPencil.item1.rpp).toEqual("Y");
+
+    RedPencil.getNewPrice(RedPencil.item1, 20);
+    expect(RedPencil.item1.currentprice).toEqual(12.8);
+    expect(RedPencil.item1.percent).toEqual(35.99999999999999);
+    expect(RedPencil.item1.rpp).toEqual("N");
   });
+
 });
 
 /*Source: https://jasmine.github.io/2.0/introduction.html*/
