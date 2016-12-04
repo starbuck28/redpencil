@@ -9,9 +9,18 @@ var RedPencil = (function() {
     sale: "N",               //on sale (Y/N)
     percent: 0,
     daysStable: -1,
+    st: 0,
     resetDaysStable: function() {
       this.daysStable = -1;
-    }               //percent discounted
+    },
+    priceStablilityCounter: function() {
+      this.daysStable += 1;
+      //Recursive countdown
+      this.st = setTimeout(priceStablilityCounter, 86400000);
+      },
+    resetDayCounter: function() {
+      clearTimeout(this.st);
+    }
   };
 
   function getNewPrice(item, percent) {
@@ -38,15 +47,9 @@ var RedPencil = (function() {
     }
   }
 
-  function priceStablilityCounter(item) {
-    item.daysStable += 1;
-//Recursive countdown
-st = setTimeout(priceStablilityCounter, 86400000);
-  }
 
-  function resetDayCounter() {
-    clearTimeout(st);
-  }
+
+
 
 
 
@@ -56,9 +59,7 @@ st = setTimeout(priceStablilityCounter, 86400000);
     getNewPrice: getNewPrice,
     getTotalPercentOff: getTotalPercentOff,
     startOrStopSale: startOrStopSale,
-    isItARedPencilPromotion: isItARedPencilPromotion,
-    priceStablilityCounter: priceStablilityCounter,
-    resetDayCounter: resetDayCounter
+    isItARedPencilPromotion: isItARedPencilPromotion
   };
 })();
 
