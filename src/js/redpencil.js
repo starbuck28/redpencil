@@ -6,7 +6,7 @@ var RedPencil = (function() {
     rpp: "N",                //under red prencil promotion (Y/N)
     sale: "N",               //on sale (Y/N)
     percent: 0,
-    daysStable: 0               //percent discounted
+    daysStable: -1               //percent discounted
   };
 
   function getNewPrice(item, percent) {
@@ -33,12 +33,19 @@ var RedPencil = (function() {
     }
   }
 
+  function priceStablilityCounter(item) {
+    item.daysStable += 1;
+//Recursive countdown
+st = setTimeout(priceStablilityCounter, 86400000);
+  }
+
   return {
     item1: item1,
     getNewPrice: getNewPrice,
     getTotalPercentOff: getTotalPercentOff,
     startOrStopSale: startOrStopSale,
-    isItARedPencilPromotion: isItARedPencilPromotion
+    isItARedPencilPromotion: isItARedPencilPromotion,
+    priceStablilityCounter: priceStablilityCounter
   };
 })();
 

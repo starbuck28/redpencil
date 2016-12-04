@@ -39,7 +39,8 @@ describe("Red Pencil Promotions", function() {
   });
 });
 
-/*describe("Manually ticking the Jasmine Clock", function() {
+/*Source: https://jasmine.github.io/2.0/introduction.html*/
+describe("Manually ticking the Jasmine Clock", function() {
   var timerCallback;
 
   beforeEach(function() {
@@ -52,11 +53,27 @@ describe("Red Pencil Promotions", function() {
   });
 
   it("causes a timeout to be called synchronously", function() {
-    setTimeout(function() {
+
+    function priceStable () {
+      RedPencil.item1.daysStable += 1;
       timerCallback();
-    }, 100);
+      var st = setTimeout(priceStable, 86400000);
+    }
+
     expect(timerCallback).not.toHaveBeenCalled();
-    jasmine.clock().tick(101);
+
+    priceStable();
+
+    expect(RedPencil.item1.daysStable).toEqual(0);
     expect(timerCallback).toHaveBeenCalled();
+    expect(timerCallback.calls.count()).toEqual(1);
+    
+    /*jasmine.clock().tick(101);
+
+    expect(timerCallback).toHaveBeenCalled();*/
+
+
+
+
   });
-});*/
+});
