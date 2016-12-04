@@ -37,6 +37,10 @@ describe("Red Pencil Promotions", function() {
     RedPencil.isItARedPencilPromotion(RedPencil.item1);
     expect(RedPencil.item1.rpp).toEqual('N');
   });
+  it("should be able to reset an item's number of days with a stable price to default value", function() {
+    RedPencil.item1.resetDaysStable();
+    expect(RedPencil.item1.daysStable).toEqual(-1);
+  });
 });
 
 /*Source: https://jasmine.github.io/2.0/introduction.html*/
@@ -99,4 +103,5 @@ describe("Manually ticking the Jasmine Clock", function() {
     expect(timerCallback.calls.count()).toEqual(4);
     expect(RedPencil.item1.daysStable).toEqual(3);
   });
+
 });

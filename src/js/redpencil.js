@@ -8,7 +8,10 @@ var RedPencil = (function() {
     rpp: "N",                //under red prencil promotion (Y/N)
     sale: "N",               //on sale (Y/N)
     percent: 0,
-    daysStable: -1               //percent discounted
+    daysStable: -1,
+    resetDaysStable: function() {
+      this.daysStable = -1;
+    }               //percent discounted
   };
 
   function getNewPrice(item, percent) {
@@ -44,6 +47,8 @@ st = setTimeout(priceStablilityCounter, 86400000);
   function resetDayCounter() {
     clearTimeout(st);
   }
+
+
 
   return {
     st: st,
