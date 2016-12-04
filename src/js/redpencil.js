@@ -1,4 +1,6 @@
 var RedPencil = (function() {
+  var st;
+
   var item1 = {
     name: "Tshirt",          //item name
     originalprice: 20,      //item price in $
@@ -39,13 +41,19 @@ var RedPencil = (function() {
 st = setTimeout(priceStablilityCounter, 86400000);
   }
 
+  function resetDayCounter() {
+    clearTimeout(st);
+  }
+
   return {
+    st: st,
     item1: item1,
     getNewPrice: getNewPrice,
     getTotalPercentOff: getTotalPercentOff,
     startOrStopSale: startOrStopSale,
     isItARedPencilPromotion: isItARedPencilPromotion,
-    priceStablilityCounter: priceStablilityCounter
+    priceStablilityCounter: priceStablilityCounter,
+    resetDayCounter: resetDayCounter
   };
 })();
 
