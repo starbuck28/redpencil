@@ -46,13 +46,7 @@ var RedPencil = (function() {
       item.rpp = "N";
     }
   }
-
-
-
-
-
-
-
+  
   return {
     st: st,
     item1: item1,

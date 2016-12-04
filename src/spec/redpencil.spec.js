@@ -57,51 +57,66 @@ describe("Manually ticking the Jasmine Clock", function() {
   });
 
   it("should be able to count days an item's price is stable and be able to stop the counter", function() {
-    var st;
 
-    function priceStable () {
-      RedPencil.item1.daysStable += 1;
-      timerCallback();
-      st = setTimeout(priceStable, 86400000);
-    }
-
-    function resetCounter() {
-      clearTimeout(st);
-    }
+    var sampleItem = {
+      name: "Tshirt",          //item name
+      originalprice: 20,      //item price in $
+      currentprice: 20,       //item price in $
+      rpp: "N",                //under red prencil promotion (Y/N)
+      sale: "N",               //on sale (Y/N)
+      percent: 0,
+      daysStable: -1,
+      st: 0,
+      resetDaysStable: function() {
+        sampleItem.daysStable = -1;
+      },
+      priceStablilityCounter: function() {
+        sampleItem.daysStable += 1;
+        timerCallback();
+        //Recursive countdown
+        sampleItem.st = setTimeout(sampleItem.priceStablilityCounter, 86400000);
+        },
+      resetDayCounter: function() {
+        clearTimeout(sampleItem.st);
+      }
+    };
 
     expect(timerCallback).not.toHaveBeenCalled();
 
-    priceStable();
+    sampleItem.priceStablilityCounter();
 
-    expect(RedPencil.item1.daysStable).toEqual(0);
+    expect(sampleItem.daysStable).toEqual(0);
     expect(timerCallback).toHaveBeenCalled();
     expect(timerCallback.calls.count()).toEqual(1);
 
     jasmine.clock().tick(86400000);  //Advances clock 86400000 miliseconds
     expect(timerCallback.calls.count()).toEqual(2);
-    expect(RedPencil.item1.daysStable).toEqual(1);
+    expect(sampleItem.daysStable).toEqual(1);
 
     jasmine.clock().tick(1);  ////Advances clock another 1 milisecond
     expect(timerCallback.calls.count()).toEqual(2);
-    expect(RedPencil.item1.daysStable).toEqual(1);
+    expect(sampleItem.daysStable).toEqual(1);
 
     jasmine.clock().tick(86399998);  ////Advances clock another 86399998 miliseconds
     expect(timerCallback.calls.count()).toEqual(2);
-    expect(RedPencil.item1.daysStable).toEqual(1);
+    expect(sampleItem.daysStable).toEqual(1);
 
     jasmine.clock().tick(1);  ////Advances clock another 1 milisecond (for a total of 86400001 miliseconds)
     expect(timerCallback.calls.count()).toEqual(3);
-    expect(RedPencil.item1.daysStable).toEqual(2);
+    expect(sampleItem.daysStable).toEqual(2);
 
     jasmine.clock().tick(86400000);
     expect(timerCallback.calls.count()).toEqual(4);
-    expect(RedPencil.item1.daysStable).toEqual(3);
+    expect(sampleItem.daysStable).toEqual(3);
 
-    resetCounter();
+    sampleItem.resetDayCounter();
+    
+    expect(timerCallback.calls.count()).toEqual(4);
+    expect(sampleItem.daysStable).toEqual(3);
 
     jasmine.clock().tick(1000000000000);
     expect(timerCallback.calls.count()).toEqual(4);
-    expect(RedPencil.item1.daysStable).toEqual(3);
+    expect(sampleItem.daysStable).toEqual(3);
   });
 
 });
