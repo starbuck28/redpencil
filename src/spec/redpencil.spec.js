@@ -67,13 +67,32 @@ describe("Manually ticking the Jasmine Clock", function() {
     expect(RedPencil.item1.daysStable).toEqual(0);
     expect(timerCallback).toHaveBeenCalled();
     expect(timerCallback.calls.count()).toEqual(1);
-    
-    /*jasmine.clock().tick(101);
 
-    expect(timerCallback).toHaveBeenCalled();*/
+    jasmine.clock().tick(86400000);  //Advances clock 86400000 miliseconds
+    expect(timerCallback).toHaveBeenCalled();
+    expect(timerCallback.calls.count()).toEqual(2);
+    expect(RedPencil.item1.daysStable).toEqual(1);
 
+    jasmine.clock().tick(1);  ////Advances clock another 1 milisecond
+    expect(timerCallback).toHaveBeenCalled();
+    expect(timerCallback.calls.count()).toEqual(2);
+    expect(RedPencil.item1.daysStable).toEqual(1);
 
+    jasmine.clock().tick(86399998);  ////Advances clock another 86399998 miliseconds
+    expect(timerCallback).toHaveBeenCalled();
+    expect(timerCallback.calls.count()).toEqual(2);
+    expect(RedPencil.item1.daysStable).toEqual(1);
 
+    jasmine.clock().tick(1);  ////Advances clock another 1 milisecond (for a total of 86400001 miliseconds)
+    expect(timerCallback).toHaveBeenCalled();
+    expect(timerCallback.calls.count()).toEqual(3);
+    expect(RedPencil.item1.daysStable).toEqual(2);
 
+    jasmine.clock().tick(86400000);
+    expect(timerCallback).toHaveBeenCalled();
+    expect(timerCallback.calls.count()).toEqual(4);
+    expect(RedPencil.item1.daysStable).toEqual(3);
   });
+
+
 });
