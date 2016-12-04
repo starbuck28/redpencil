@@ -1,6 +1,6 @@
 var RedPencil = (function() {
-  var st;
 
+  //Sample item for sale
   var item1 = {
     name: "Tshirt",          //item name
     originalprice: 20,      //item price in $
@@ -10,27 +10,33 @@ var RedPencil = (function() {
     percent: 0,
     daysStable: -1,
     st: 0,
+    //Resets # of days price is stable
     resetDaysStable: function() {
       this.daysStable = -1;
     },
+    //A counter that increases the number of days an item's price is stable every 24h
     priceStablilityCounter: function() {
       this.daysStable += 1;
-      //Recursive countdown
+      //Recursive method
       this.st = setTimeout(priceStablilityCounter, 86400000);
       },
+    //Stops priceStablilityCounter
     resetDayCounter: function() {
       clearTimeout(this.st);
     }
   };
 
+  //Calculates item's new current price based on percent off value
   function getNewPrice(item, percent) {
     item.currentprice -= item.currentprice * percent * 0.01;
   }
 
+  //Calculates total percent off original price
   function getTotalPercentOff(item) {
     item.percent = (item.originalprice - item.currentprice) / (item.originalprice * 0.01)
   }
 
+  //Updates sale state (Y or N) based on item's percent off value
   function startOrStopSale(item) {
     if (item.percent > 0) {
       item.sale = 'Y';
@@ -39,6 +45,7 @@ var RedPencil = (function() {
     }
   }
 
+  //Checks to see if item meets RPP parameters
   function isItARedPencilPromotion(item) {
     if (item.percent >= 5 && item.percent <= 30) {
       item.rpp = "Y";
@@ -46,9 +53,8 @@ var RedPencil = (function() {
       item.rpp = "N";
     }
   }
-  
+
   return {
-    st: st,
     item1: item1,
     getNewPrice: getNewPrice,
     getTotalPercentOff: getTotalPercentOff,
