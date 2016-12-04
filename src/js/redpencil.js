@@ -26,9 +26,23 @@ var RedPencil = (function() {
     }
   };
 
+  //Checks to see if item meets RPP parameters
+  function isItARedPencilPromotion(item) {
+    if (item.percent >= 5 && item.percent <= 30) {
+      item.rpp = "Y";
+    } else {
+      item.rpp = "N";
+    }
+  }
+
+
   //Calculates item's new current price based on percent off value
   function getNewPrice(item, percent) {
-    item.currentprice -= item.currentprice * percent * 0.01;
+      item.currentprice -= item.currentprice * percent * 0.01;
+      //Calculates total percent off
+      this.getTotalPercentOff(item);
+      //Checks to see if it qualifies for RPP
+      RedPencil.isItARedPencilPromotion(item);
   }
 
   //Calculates total percent off original price
@@ -42,15 +56,6 @@ var RedPencil = (function() {
       item.sale = 'Y';
     } else {
       item.sale = 'N';
-    }
-  }
-
-  //Checks to see if item meets RPP parameters
-  function isItARedPencilPromotion(item) {
-    if (item.percent >= 5 && item.percent <= 30) {
-      item.rpp = "Y";
-    } else {
-      item.rpp = "N";
     }
   }
 

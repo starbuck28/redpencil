@@ -41,6 +41,21 @@ describe("Red Pencil Promotions", function() {
     RedPencil.item1.resetDaysStable();
     expect(RedPencil.item1.daysStable).toEqual(-1);
   });
+  it("when a percent discount is applied, a new price is calculated, it should automatically check if it is a red pencil promotion", function() {
+    RedPencil.item1.originalprice = 20;
+    RedPencil.item1.currentprice = 20;
+    RedPencil.item1.percent = 0;
+    RedPencil.getNewPrice(RedPencil.item1, 2);
+    expect(RedPencil.item1.rpp).toEqual("N");
+
+    RedPencil.item1.originalprice = 20;
+    RedPencil.item1.currentprice = 20;
+    RedPencil.item1.percent = 0;
+    RedPencil.getNewPrice(RedPencil.item1, 20);
+    expect(RedPencil.item1.currentprice).toEqual(16);
+    expect(RedPencil.item1.percent).toEqual(20);
+    expect(RedPencil.item1.rpp).toEqual("Y");
+  });
 });
 
 /*Source: https://jasmine.github.io/2.0/introduction.html*/
@@ -110,7 +125,7 @@ describe("Manually ticking the Jasmine Clock", function() {
     expect(sampleItem.daysStable).toEqual(3);
 
     sampleItem.resetDayCounter();
-    
+
     expect(timerCallback.calls.count()).toEqual(4);
     expect(sampleItem.daysStable).toEqual(3);
 
