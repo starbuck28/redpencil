@@ -28,11 +28,13 @@ var RedPencil = (function() {
 
   //Checks to see if item meets RPP parameters
   function isItARedPencilPromotion(item) {
-    if (item.percent >= 5 && item.percent <= 30) {
-      item.rpp = "Y";
-    } else {
-      item.rpp = "N";
-    }
+    if(item.rpp === "N") {
+      if(item.daysStable >= 30 && item.percent >= 5 && item.percent <= 30) {
+          item.rpp = "Y";
+        } else {
+          item.rpp = "N";
+        }
+      }
   }
 
 
