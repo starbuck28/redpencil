@@ -26,6 +26,10 @@ var RedPencil = (function() {
       item1.st = setTimeout(item1.priceStablilityCounter, 86400000);
       },
     daysRPPCounter: function() {
+      if(item1.daysRPP === 30) {
+        item1.resetRPPCounter();
+        item1.resetDaysRPP();
+      }
       item1.daysRPP += 1;
       //Recursive method
       item1.st2 = setTimeout(item1.daysRPPCounter, 86400000);

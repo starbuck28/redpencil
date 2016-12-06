@@ -196,11 +196,71 @@ describe("Manually ticking the Jasmine Clock", function() {
     expect(sampleItem.daysStable).toEqual(3);
     expect(sampleItem.daysRPP).toEqual(3);
 
-    jasmine.clock().tick(1000000000000);
+    jasmine.clock().tick(100000000);
     expect(timerCallback.calls.count()).toEqual(4);
     expect(sampleItem.daysStable).toEqual(3);
     expect(sampleItem.daysRPP).toEqual(3);
   });
 
+  it("should be able to recognize that a RPP should end, stop corresponding timer, and reset daysRPP value", function() {
+    var sampleItem = {
+      name: "Tshirt",          //item name
+      originalprice: 20,      //item price in $
+      currentprice: 20,       //item price in $
+      rpp: "N",                //under red prencil promotion (Y/N)
+      sale: "N",               //on sale (Y/N)
+      percent: 0,
+      daysStable: -1,
+      daysRPP: -1,
+      st: 0,
+      st2: 0,
+      resetDaysStable: function() {
+        sampleItem.daysStable = -1;
+      },
+      resetDaysRPP: function() {
+        sampleItem.daysRPP = -1;
+      },
+      priceStablilityCounter: function() {
+        sampleItem.daysStable += 1;
+        timerCallback();
+        //Recursive countdown
+        sampleItem.st = setTimeout(sampleItem.priceStablilityCounter, 86400000);
+        },
+      daysRPPCounter: function() {
+        if(sampleItem.daysRPP === 30) {
+          sampleItem.resetRPPCounter();
+          sampleItem.resetDaysRPP();
+        } else {
+        sampleItem.daysRPP += 1;
+        timerCallback2();
+        //Recursive method
+        sampleItem.st2 = setTimeout(sampleItem.daysRPPCounter, 86400000);
+      }
+        },
+      resetDayCounter: function() {
+        clearTimeout(sampleItem.st);
+      },
+      resetRPPCounter: function() {
+        clearTimeout(sampleItem.st2);
+      }
+    };
+
+    expect(timerCallback2).not.toHaveBeenCalled();
+
+    sampleItem.daysRPPCounter();
+
+    expect(sampleItem.daysRPP).toEqual(0);
+    expect(timerCallback2).toHaveBeenCalled();
+    expect(timerCallback2.calls.count()).toEqual(1);
+
+    jasmine.clock().tick(86400000);  //Advances clock 86400000 miliseconds
+
+    expect(sampleItem.daysRPP).toEqual(1);
+    expect(timerCallback2.calls.count()).toEqual(2);
+
+    jasmine.clock().tick(2592000000);  //Advances clock miliseconds
+
+    expect(sampleItem.daysRPP).toEqual(-1);
+  });
 
 });
