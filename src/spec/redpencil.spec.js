@@ -115,6 +115,16 @@ describe("Red Pencil Promotions", function() {
     expect(RedPencil.item1.currentprice).toEqual(15.2);
     expect(RedPencil.item1.percent).toEqual(24.000000000000004);
     expect(RedPencil.item1.rpp).toEqual("Y");
+
+    RedPencil.item1.originalprice = 20;
+    RedPencil.item1.currentprice = 16;
+    RedPencil.item1.percent = 20;
+    RedPencil.item1.daysStable = 20;
+    RedPencil.item1.rpp = 'Y';
+    RedPencil.getNewPrice(RedPencil.item1, 20);
+    expect(RedPencil.item1.currentprice).toEqual(12.8);
+    expect(RedPencil.item1.percent).toEqual(35.99999999999999);
+    expect(RedPencil.item1.rpp).toEqual("N");
   });
 
 });
