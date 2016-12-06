@@ -159,22 +159,32 @@ describe("Manually ticking the Jasmine Clock", function() {
     jasmine.clock().tick(86400000);  //Advances clock 86400000 miliseconds
     expect(timerCallback.calls.count()).toEqual(2);
     expect(sampleItem.daysStable).toEqual(1);
+    expect(sampleItem.daysRPP).toEqual(1);
+    expect(timerCallback2.calls.count()).toEqual(2);
 
     jasmine.clock().tick(1);  ////Advances clock another 1 milisecond
     expect(timerCallback.calls.count()).toEqual(2);
     expect(sampleItem.daysStable).toEqual(1);
+    expect(sampleItem.daysRPP).toEqual(1);
+    expect(timerCallback2.calls.count()).toEqual(2);
 
     jasmine.clock().tick(86399998);  ////Advances clock another 86399998 miliseconds
     expect(timerCallback.calls.count()).toEqual(2);
     expect(sampleItem.daysStable).toEqual(1);
+    expect(sampleItem.daysRPP).toEqual(1);
+    expect(timerCallback2.calls.count()).toEqual(2);
 
     jasmine.clock().tick(1);  ////Advances clock another 1 milisecond (for a total of 86400001 miliseconds)
     expect(timerCallback.calls.count()).toEqual(3);
     expect(sampleItem.daysStable).toEqual(2);
+    expect(sampleItem.daysRPP).toEqual(2);
+    expect(timerCallback2.calls.count()).toEqual(3);
 
     jasmine.clock().tick(86400000);
     expect(timerCallback.calls.count()).toEqual(4);
     expect(sampleItem.daysStable).toEqual(3);
+    expect(sampleItem.daysRPP).toEqual(3);
+    expect(timerCallback2.calls.count()).toEqual(4);
 
     sampleItem.resetDayCounter();
 
