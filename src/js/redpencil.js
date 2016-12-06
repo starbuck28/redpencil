@@ -34,6 +34,12 @@ var RedPencil = (function() {
         } else {
           item.rpp = "N";
         }
+      } else if(item.rpp === "Y") {
+        if(item.percent >= 5 && item.percent <= 30) {
+          item.rpp = "Y";
+        } else {
+          item.rpp = "N";
+        }
       }
   }
 

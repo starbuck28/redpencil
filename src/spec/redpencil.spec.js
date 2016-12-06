@@ -44,7 +44,26 @@ describe("Red Pencil Promotions", function() {
     RedPencil.item1.rpp = 'N';
     RedPencil.isItARedPencilPromotion(RedPencil.item1);
     expect(RedPencil.item1.rpp).toEqual('N');
+
+    RedPencil.item1.percent = 0;
+    RedPencil.item1.daysStable = 0;
+    RedPencil.item1.rpp = 'Y';
+    RedPencil.isItARedPencilPromotion(RedPencil.item1);
+    expect(RedPencil.item1.rpp).toEqual('N');
+
+    RedPencil.item1.percent = 20;
+    RedPencil.item1.daysStable = 0;
+    RedPencil.item1.rpp = 'Y';
+    RedPencil.isItARedPencilPromotion(RedPencil.item1);
+    expect(RedPencil.item1.rpp).toEqual('Y');
+
+    RedPencil.item1.percent = 40;
+    RedPencil.item1.daysStable = 45;
+    RedPencil.item1.rpp = 'Y';
+    RedPencil.isItARedPencilPromotion(RedPencil.item1);
+    expect(RedPencil.item1.rpp).toEqual('N');
   });
+
   it("should be able to reset an item's number of days with a stable price to default value", function() {
     RedPencil.item1.resetDaysStable();
     expect(RedPencil.item1.daysStable).toEqual(-1);
