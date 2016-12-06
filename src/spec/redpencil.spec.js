@@ -68,6 +68,10 @@ describe("Red Pencil Promotions", function() {
     RedPencil.item1.resetDaysStable();
     expect(RedPencil.item1.daysStable).toEqual(-1);
   });
+  it("should be able to reset an item's number of days under a RPP to default value", function() {
+    RedPencil.item1.resetDaysRPP();
+    expect(RedPencil.item1.daysStable).toEqual(-1);
+  });
 /*  it("when a percent discount is applied, a new price is calculated, it should automatically check if it is a red pencil promotion", function() {
     RedPencil.item1.originalprice = 20;
     RedPencil.item1.currentprice = 20;
