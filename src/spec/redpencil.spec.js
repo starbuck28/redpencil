@@ -140,6 +140,9 @@ describe("Manually ticking the Jasmine Clock", function() {
         },
       resetDayCounter: function() {
         clearTimeout(sampleItem.st);
+      },
+      resetRPPCounter: function() {
+        clearTimeout(sampleItem.st2);
       }
     };
 
@@ -187,13 +190,16 @@ describe("Manually ticking the Jasmine Clock", function() {
     expect(timerCallback2.calls.count()).toEqual(4);
 
     sampleItem.resetDayCounter();
+    sampleItem.resetRPPCounter();
 
     expect(timerCallback.calls.count()).toEqual(4);
     expect(sampleItem.daysStable).toEqual(3);
+    expect(sampleItem.daysRPP).toEqual(3);
 
     jasmine.clock().tick(1000000000000);
     expect(timerCallback.calls.count()).toEqual(4);
     expect(sampleItem.daysStable).toEqual(3);
+    expect(sampleItem.daysRPP).toEqual(3);
   });
 
 

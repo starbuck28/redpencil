@@ -33,6 +33,9 @@ var RedPencil = (function() {
     //Stops priceStablilityCounter
     resetDayCounter: function() {
       clearTimeout(item1.st);
+    },
+    resetRPPCounter: function() {
+      clearTimeout(item1.st2);
     }
   };
 
