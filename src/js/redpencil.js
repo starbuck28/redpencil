@@ -48,6 +48,7 @@ var RedPencil = (function() {
     if(item.rpp === "N") {
       if(item.daysStable >= 30 && item.percent >= 5 && item.percent <= 30) {
           item.rpp = "Y";
+          item.daysRPPCounter();
         } else {
           item.rpp = "N";
         }
@@ -56,6 +57,8 @@ var RedPencil = (function() {
           item.rpp = "Y";
         } else {
           item.rpp = "N";
+          item.resetRPPCounter();
+          item.resetDaysRPP();
         }
       }
   }
@@ -68,6 +71,11 @@ var RedPencil = (function() {
       this.getTotalPercentOff(item);
       //Checks to see if it qualifies for RPP
       this.isItARedPencilPromotion(item);
+      //Resets daysStable
+      item.resetDayCounter();
+      item.resetDaysStable();
+      //Starts Day counter
+      item.priceStablilityCounter();
   }
 
   //Calculates total percent off original price

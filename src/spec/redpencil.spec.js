@@ -127,6 +127,12 @@ describe("Red Pencil Promotions", function() {
     expect(RedPencil.item1.rpp).toEqual("N");
   });
 
+  it("when a percent discount is applied, the number of days an item's price is stable is reset and priceStablilityCounter is started", function() {
+    RedPencil.item1.daysStable = 5;
+    RedPencil.getNewPrice(RedPencil.item1, 20);
+    expect(RedPencil.item1.daysStable).toEqual(0);
+  });
+
 });
 
 /*Source: https://jasmine.github.io/2.0/introduction.html*/

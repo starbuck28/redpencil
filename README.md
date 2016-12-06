@@ -1,7 +1,7 @@
 # redpencil
 Red Pencil Code Kata (Source: https://stefanroock.wordpress.com/2011/03/04/red-pencil-code-kata/)
 
-We provide a shopping portal, where dealers can offer their goods (similiar to Amazon market place). We want to support red pencil promotions for reduced prices. During the red pencil promotion the old price is crossed out in red and the new reduced price is written next to it.
+We provide a shopping portal, where dealers can offer their goods (similar to Amazon market place). We want to support red pencil promotions for reduced prices. During the red pencil promotion the old price is crossed out in red and the new reduced price is written next to it.
 
 To avoid misuse of red pencil promotions the red pencil promotions are activated and deactivated automatically.
 
