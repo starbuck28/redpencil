@@ -9,6 +9,7 @@ var RedPencil = (function() {
     sale: "N",               //on sale (Y/N)
     percent: 0,
     daysStable: -1,
+    daysRPP: -1,
     st: 0,
     //Resets # of days price is stable
     resetDaysStable: function() {
