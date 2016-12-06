@@ -98,9 +98,11 @@ describe("Red Pencil Promotions", function() {
 /*Source: https://jasmine.github.io/2.0/introduction.html*/
 describe("Manually ticking the Jasmine Clock", function() {
   var timerCallback;
+  var timerCallback2;
 
   beforeEach(function() {
     timerCallback = jasmine.createSpy("timerCallback");
+    timerCallback2 = jasmine.createSpy("timerCallback2");
     jasmine.clock().install();
   });
 
@@ -108,7 +110,7 @@ describe("Manually ticking the Jasmine Clock", function() {
     jasmine.clock().uninstall();
   });
 
-  it("should be able to count days an item's price is stable and be able to stop the counter", function() {
+  it("should be able to count days an item's price is stable and be able to stop the counter/be able to track days under RPP and be able to stop counter", function() {
 
     var sampleItem = {
       name: "Tshirt",          //item name
@@ -118,7 +120,9 @@ describe("Manually ticking the Jasmine Clock", function() {
       sale: "N",               //on sale (Y/N)
       percent: 0,
       daysStable: -1,
+      daysRPP: -1,
       st: 0,
+      st2: 0,
       resetDaysStable: function() {
         sampleItem.daysStable = -1;
       },
@@ -128,18 +132,29 @@ describe("Manually ticking the Jasmine Clock", function() {
         //Recursive countdown
         sampleItem.st = setTimeout(sampleItem.priceStablilityCounter, 86400000);
         },
+      daysRPPCounter: function() {
+        sampleItem.daysRPP += 1;
+        timerCallback2();
+        //Recursive method
+        sampleItem.st2 = setTimeout(sampleItem.daysRPPCounter, 86400000);
+        },
       resetDayCounter: function() {
         clearTimeout(sampleItem.st);
       }
     };
 
     expect(timerCallback).not.toHaveBeenCalled();
+    expect(timerCallback2).not.toHaveBeenCalled();
 
     sampleItem.priceStablilityCounter();
+    sampleItem.daysRPPCounter();
 
     expect(sampleItem.daysStable).toEqual(0);
     expect(timerCallback).toHaveBeenCalled();
     expect(timerCallback.calls.count()).toEqual(1);
+    expect(sampleItem.daysRPP).toEqual(0);
+    expect(timerCallback2).toHaveBeenCalled();
+    expect(timerCallback2.calls.count()).toEqual(1);
 
     jasmine.clock().tick(86400000);  //Advances clock 86400000 miliseconds
     expect(timerCallback.calls.count()).toEqual(2);

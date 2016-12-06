@@ -11,6 +11,7 @@ var RedPencil = (function() {
     daysStable: -1,
     daysRPP: -1,
     st: 0,
+    st2: 0,
     //Resets # of days price is stable
     resetDaysStable: function() {
       item1.daysStable = -1;
@@ -24,6 +25,11 @@ var RedPencil = (function() {
       //Recursive method
       item1.st = setTimeout(item1.priceStablilityCounter, 86400000);
       },
+    daysRPPCounter: function() {
+      item1.daysRPP += 1;
+      //Recursive method
+      item1.st2 = setTimeout(item1.daysRPPCounter, 86400000);
+    },
     //Stops priceStablilityCounter
     resetDayCounter: function() {
       clearTimeout(item1.st);
