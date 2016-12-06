@@ -72,26 +72,50 @@ describe("Red Pencil Promotions", function() {
     RedPencil.item1.resetDaysRPP();
     expect(RedPencil.item1.daysStable).toEqual(-1);
   });
-/*  it("when a percent discount is applied, a new price is calculated, it should automatically check if it is a red pencil promotion", function() {
+  it("when a percent discount is applied, a new price is calculated, it should automatically check if it is a red pencil promotion", function() {
     RedPencil.item1.originalprice = 20;
     RedPencil.item1.currentprice = 20;
     RedPencil.item1.percent = 0;
+    RedPencil.item1.daysStable = 35;
+    RedPencil.item1.rpp = 'N';
     RedPencil.getNewPrice(RedPencil.item1, 2);
     expect(RedPencil.item1.rpp).toEqual("N");
 
     RedPencil.item1.originalprice = 20;
     RedPencil.item1.currentprice = 20;
     RedPencil.item1.percent = 0;
+    RedPencil.item1.daysStable = 35;
+    RedPencil.item1.rpp = 'N';
     RedPencil.getNewPrice(RedPencil.item1, 20);
     expect(RedPencil.item1.currentprice).toEqual(16);
     expect(RedPencil.item1.percent).toEqual(20);
     expect(RedPencil.item1.rpp).toEqual("Y");
 
+    RedPencil.item1.originalprice = 20;
+    RedPencil.item1.currentprice = 20;
+    RedPencil.item1.percent = 0;
+    RedPencil.item1.daysStable = 20;
+    RedPencil.item1.rpp = 'N';
+    RedPencil.getNewPrice(RedPencil.item1, 20);
+    expect(RedPencil.item1.currentprice).toEqual(16);
+    expect(RedPencil.item1.percent).toEqual(20);
+    expect(RedPencil.item1.rpp).toEqual("N");
+
     RedPencil.getNewPrice(RedPencil.item1, 20);
     expect(RedPencil.item1.currentprice).toEqual(12.8);
     expect(RedPencil.item1.percent).toEqual(35.99999999999999);
     expect(RedPencil.item1.rpp).toEqual("N");
-  });*/
+
+    RedPencil.item1.originalprice = 20;
+    RedPencil.item1.currentprice = 16;
+    RedPencil.item1.percent = 20;
+    RedPencil.item1.daysStable = 20;
+    RedPencil.item1.rpp = 'Y';
+    RedPencil.getNewPrice(RedPencil.item1, 5);
+    expect(RedPencil.item1.currentprice).toEqual(15.2);
+    expect(RedPencil.item1.percent).toEqual(24.000000000000004);
+    expect(RedPencil.item1.rpp).toEqual("Y");
+  });
 
 });
 
