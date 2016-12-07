@@ -33,6 +33,9 @@ var RedPencil = (function() {
       if(item1.daysRPP === 30) {
         item1.resetRPPCounter();
         item1.resetDaysRPP();
+        item1.resetDayCounter();
+        item1.resetDaysStable();
+        item1.priceStablilityCounter();
       }
       item1.daysRPP += 1;
       //Recursive method
@@ -91,6 +94,10 @@ Item.prototype.daysRPPCounter = function() {
   if(this.daysRPP === 30) {
     this.resetRPPCounter();
     this.resetDaysRPP();
+    this.resetDayCounter();
+    this.resetDaysStable();
+    this.priceStablilityCounter();
+
   }
   this.daysRPP += 1;
   //Recursive method
