@@ -46,7 +46,7 @@ var RedPencil = (function() {
     resetRPPCounter: function() {
       clearTimeout(item1.st2);
     },
-
+    //Reset & Restart counter
     restartPriceStability: function() {
       item1.resetDayCounter();
       item1.resetDaysStable();
@@ -118,12 +118,12 @@ var item2 = new Item("Tshirt", 20, 20, "N", "N", 0, -1, -1, 0, 0, "none");
           item.rpp = "Y";
           //Start RPP counter
           item.daysRPPCounter();
-        } else {
+      } else {
           //Item does not qualify for RPP
           item.rpp = "N";
-        }
+          }
         //If an item is already under a RPP
-      } else if(item.rpp === "Y") {
+    } else if(item.rpp === "Y") {
         //If the item's new total percent off is still within 5 and 30%
         if(item.percent >= 5 && item.percent <= 30 && item.lastpricechange !== "up") {
           //Item qualifies to continue as a RPP
@@ -134,10 +134,9 @@ var item2 = new Item("Tshirt", 20, 20, "N", "N", 0, -1, -1, 0, 0, "none");
           //RPP counter is stopped and reset
           item.resetRPPCounter();
           item.resetDaysRPP();
-        }
+          }
       }
   }
-
 
   //Calculates item's new current price based on percent off value
   function getNewPrice(item, percent) {
@@ -163,7 +162,7 @@ var item2 = new Item("Tshirt", 20, 20, "N", "N", 0, -1, -1, 0, 0, "none");
       item.sale = 'Y';
     } else {
       item.sale = 'N';
-    }
+      }
   }
 
   //Stops sale if item's percent off is zero
@@ -171,7 +170,6 @@ var item2 = new Item("Tshirt", 20, 20, "N", "N", 0, -1, -1, 0, 0, "none");
     item.percent = 0;
     item.sale = 'N';
     item.restartPriceStability();
-
     item.resetRPPCounter();
     item.resetDaysRPP();
     item1.currentprice = item1.originalprice;
@@ -183,10 +181,8 @@ var item2 = new Item("Tshirt", 20, 20, "N", "N", 0, -1, -1, 0, 0, "none");
         item.lastpricechange = "down";
     } else if(item.percent > percent) {
       item.lastpricechange = "up";
-    }
+      }
   }
-
-
 
   return {
     item1: item1,
@@ -199,5 +195,3 @@ var item2 = new Item("Tshirt", 20, 20, "N", "N", 0, -1, -1, 0, 0, "none");
     item2: item2
   };
 })();
-
-    //Need to refactor code to DRY!!
