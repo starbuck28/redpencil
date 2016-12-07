@@ -157,6 +157,16 @@ describe("Red Pencil Promotions", function() {
     expect(RedPencil.item1.currentprice).toEqual(20);
   });
 
+  it("should be able to track whether an item's price was last increased or decreased", function() {
+    RedPencil.item1.percent = 5;
+    RedPencil.percentUpOrDown(RedPencil.item1, 20);
+    expect(RedPencil.item1.lastpricechange).toEqual("down");
+
+    RedPencil.item1.percent = 50;
+    RedPencil.percentUpOrDown(RedPencil.item1, 20);
+    expect(RedPencil.item1.lastpricechange).toEqual("up");
+  });
+
 });
 
 /*Source: https://jasmine.github.io/2.0/introduction.html*/

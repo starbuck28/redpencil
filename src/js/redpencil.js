@@ -12,6 +12,7 @@ var RedPencil = (function() {
     daysRPP: -1,
     st: 0,
     st2: 0,
+    lastpricechange: "none",
     //Resets # of days price is stable
     resetDaysStable: function() {
       item1.daysStable = -1;
@@ -113,13 +114,22 @@ var RedPencil = (function() {
     item1.currentprice = item1.originalprice;
   }
 
+  function percentUpOrDown(item, percent) {
+    if(item.percent < percent) {
+        item.lastpricechange = "down";
+    } else if(item.percent > percent) {
+      item.lastpricechange = "up";
+    }
+  }
+
   return {
     item1: item1,
     getNewPrice: getNewPrice,
     getTotalPercentOff: getTotalPercentOff,
     startOrStopSale: startOrStopSale,
     isItARedPencilPromotion: isItARedPencilPromotion,
-    stopSale: stopSale
+    stopSale: stopSale,
+    percentUpOrDown: percentUpOrDown
   };
 })();
 
