@@ -44,9 +44,55 @@ var RedPencil = (function() {
     }
   };
 
-function Item() {
-
+function Item(name, originalprice, currentprice, rpp, sale, percent, daysStable, daysRPP, st, st2, lastpricechange) {
+  this.name = name;          //item name
+  this.originalprice = originalprice;      //item price in $
+  this.currentprice = currentprice;       //item price in $
+  this.rpp = rpp;                //under red prencil promotion (Y/N)
+  this.sale = sale;               //on sale (Y/N)
+  this.percent = percent;
+  this.daysStable = daysStable;
+  this.daysRPP = daysRPP;
+  this.st = st;
+  this.st2 = st2;
+  this.lastpricechange = lastpricechange;
 }
+
+Item.prototype.resetDaysStable = function() {
+  this.daysStable = -1;
+}
+
+Item.prototype.resetDaysRPP = function() {
+  this.daysRPP = -1;
+}
+
+Item.prototype.priceStablilityCounter = function() {
+  this.daysStable += 1;
+  //Recursive method
+  this.st = setTimeout(this.priceStablilityCounter, 86400000);
+  }
+
+Item.prototype.daysRPPCounter = function() {
+  if(this.daysRPP === 30) {
+    this.resetRPPCounter();
+    this.resetDaysRPP();
+  }
+  this.daysRPP += 1;
+  //Recursive method
+  this.st2 = setTimeout(this.daysRPPCounter, 86400000);
+}
+
+Item.prototype.resetDayCounter = function() {
+  clearTimeout(this.st);
+}
+
+Item.prototype.resetRPPCounter = function() {
+  clearTimeout(this.st2);
+}
+
+
+
+var item2 = new Item("Tshirt", 20, 20, "N", "N", 0, -1, -1, 0, 0, "none");
   //Checks to see if item meets RPP parameters
   function isItARedPencilPromotion(item) {
     if(item.rpp === "N") {
