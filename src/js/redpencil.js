@@ -103,12 +103,23 @@ var RedPencil = (function() {
     }
   }
 
+  function stopSale(item) {
+    item.percent = 0;
+    item.sale = 'N';
+    item.resetDayCounter();
+    item.resetDaysStable();
+    item.priceStablilityCounter();
+    item.resetRPPCounter();
+    item.resetDaysRPP();
+  }
+
   return {
     item1: item1,
     getNewPrice: getNewPrice,
     getTotalPercentOff: getTotalPercentOff,
     startOrStopSale: startOrStopSale,
-    isItARedPencilPromotion: isItARedPencilPromotion
+    isItARedPencilPromotion: isItARedPencilPromotion,
+    stopSale: stopSale
   };
 })();
 

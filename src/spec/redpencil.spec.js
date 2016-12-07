@@ -140,6 +140,17 @@ describe("Red Pencil Promotions", function() {
     RedPencil.getNewPrice(RedPencil.item1, 20);
     expect(RedPencil.item1.daysStable).toEqual(0);
   });
+  it("should be able to stop a sale, reset days price is stable, and stop a RPP", function() {
+    RedPencil.item1.percent = 20;
+    RedPencil.item1.sale = 'Y';
+    RedPencil.item1.daysStable = 15;
+    RedPencil.item1.daysRPP = 15;
+    RedPencil.stopSale(RedPencil.item1);
+    expect(RedPencil.item1.percent).toEqual(0);
+    expect(RedPencil.item1.sale).toEqual('N');
+    expect(RedPencil.item1.daysStable).toEqual(0);
+    expect(RedPencil.item1.daysRPP).toEqual(-1);
+  });
 
 });
 
