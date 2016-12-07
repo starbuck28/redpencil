@@ -301,14 +301,82 @@ describe("Manually ticking the Jasmine Clock", function() {
     expect(timerCallback2).toHaveBeenCalled();
     expect(timerCallback2.calls.count()).toEqual(1);
 
-    jasmine.clock().tick(86400000);  //Advances clock 86400000 miliseconds
+    jasmine.clock().tick(86400000);  //Advances clock another 86400000 miliseconds
 
     expect(sampleItem.daysRPP).toEqual(1);
     expect(timerCallback2.calls.count()).toEqual(2);
 
-    jasmine.clock().tick(2592000000);  //Advances clock miliseconds
+    jasmine.clock().tick(2592000000);  //Advances clock miliseconds to total of 31 days total (including previous clicks)
 
     expect(sampleItem.daysRPP).toEqual(-1);
+  });
+
+  it("when an item's percent off is changed, it should calculate item's current price, calculate total percent off, trigger check to see if it qualifies for a RPP, stop days stable timer, reset days stable, and start priceStablilityCounter", function() {
+    var sampleItem = {
+      name: "Tshirt",          //item name
+      originalprice: 20,      //item price in $
+      currentprice: 20,       //item price in $
+      rpp: "N",                //under red prencil promotion (Y/N)
+      sale: "N",               //on sale (Y/N)
+      percent: 0,
+      daysStable: 30,
+      daysRPP: -1,
+      st: 0,
+      st2: 0,
+      resetDaysStable: function() {
+        sampleItem.daysStable = -1;
+      },
+      resetDaysRPP: function() {
+        sampleItem.daysRPP = -1;
+      },
+      priceStablilityCounter: function() {
+        sampleItem.daysStable += 1;
+        timerCallback();
+        //Recursive countdown
+        sampleItem.st = setTimeout(sampleItem.priceStablilityCounter, 86400000);
+        },
+      daysRPPCounter: function() {
+        if(sampleItem.daysRPP === 30) {
+          sampleItem.resetRPPCounter();
+          sampleItem.resetDaysRPP();
+        } else {
+        sampleItem.daysRPP += 1;
+        timerCallback2();
+        //Recursive method
+        sampleItem.st2 = setTimeout(sampleItem.daysRPPCounter, 86400000);
+      }
+        },
+      resetDayCounter: function() {
+        clearTimeout(sampleItem.st);
+      },
+      resetRPPCounter: function() {
+        clearTimeout(sampleItem.st2);
+      }
+    };
+
+    RedPencil.getNewPrice(sampleItem, 20);
+    expect(sampleItem.currentprice).toEqual(16);
+    expect(sampleItem.percent).toEqual(20);
+    expect(sampleItem.rpp).toEqual('Y');
+    expect(sampleItem.daysStable).toEqual(0);
+    expect(sampleItem.daysRPP).toEqual(0);
+
+    jasmine.clock().tick(1296000000);  //Advance clock 15 days
+
+    expect(sampleItem.currentprice).toEqual(16);
+    expect(sampleItem.percent).toEqual(20);
+    expect(sampleItem.rpp).toEqual('Y');
+    expect(sampleItem.daysStable).toEqual(15);
+    expect(sampleItem.daysRPP).toEqual(15);
+
+    RedPencil.getNewPrice(sampleItem, 25);
+
+    expect(sampleItem.currentprice).toEqual(12);
+    expect(sampleItem.percent).toEqual(40);
+    expect(sampleItem.rpp).toEqual('N');
+    expect(sampleItem.daysStable).toEqual(0);
+    expect(sampleItem.daysRPP).toEqual(-1);
+
   });
 
 });
