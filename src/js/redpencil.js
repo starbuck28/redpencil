@@ -75,9 +75,8 @@ var RedPencil = (function() {
 
   //Calculates item's new current price based on percent off value
   function getNewPrice(item, percent) {
-      item.currentprice -= item.currentprice * percent * 0.01;
-      //Calculates total percent off
-      this.getTotalPercentOff(item);
+      item.currentprice = item.originalprice - (item.originalprice * percent * 0.01);
+      item.percent = percent;
       //Checks to see if item is on sale
       this.startOrStopSale(item);
       //Checks to see if it qualifies for RPP
