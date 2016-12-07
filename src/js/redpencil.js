@@ -44,7 +44,7 @@ var RedPencil = (function() {
     }
   };
 
-function Item(name, originalprice, currentprice, rpp, sale, percent, daysStable, daysRPP, st, st2, lastpricechange) {
+function Item(name, originalprice, currentprice, rpp, sale, percent, daysStable, daysRPP, st, lastpricechange) {
   this.name = name;          //item name
   this.originalprice = originalprice;      //item price in $
   this.currentprice = currentprice;       //item price in $
@@ -54,7 +54,6 @@ function Item(name, originalprice, currentprice, rpp, sale, percent, daysStable,
   this.daysStable = daysStable;
   this.daysRPP = daysRPP;
   this.st = st;
-  this.st2 = st2;
   this.lastpricechange = lastpricechange;
 }
 
@@ -79,20 +78,20 @@ Item.prototype.daysRPPCounter = function() {
   }
   this.daysRPP += 1;
   //Recursive method
-  this.st2 = setTimeout(this.daysRPPCounter, 86400000);
+  this.st2 = setTimeout(this.daysRPPCounter, 86400000)
 }
 
+
 Item.prototype.resetDayCounter = function() {
-  clearTimeout(this.st);
+  clearTimeout(this.si);
 }
 
 Item.prototype.resetRPPCounter = function() {
-  clearTimeout(this.st2);
+  clearTimeout(this.si2);
 }
 
-
-
 var item2 = new Item("Tshirt", 20, 20, "N", "N", 0, -1, -1, 0, 0, "none");
+
   //Checks to see if item meets RPP parameters
   function isItARedPencilPromotion(item) {
     if(item.rpp === "N") {
@@ -182,7 +181,8 @@ var item2 = new Item("Tshirt", 20, 20, "N", "N", 0, -1, -1, 0, 0, "none");
     isItARedPencilPromotion: isItARedPencilPromotion,
     stopSale: stopSale,
     percentUpOrDown: percentUpOrDown,
-    Item: Item
+    Item: Item,
+    item2: item2
   };
 })();
 

@@ -418,3 +418,59 @@ describe("Manually ticking the Jasmine Clock", function() {
   });
 
 });
+
+/*describe("Item constructor function testing with Jasmine Clock", function() {
+  beforeEach(function() {
+    jasmine.clock().install();
+  });
+
+  afterEach(function() {
+    jasmine.clock().uninstall();
+  });
+
+it("should be able to count days an item's price is stable and be able to stop the counter/be able to track days under RPP and be able to stop counter", function() {
+  RedPencil.item2.priceStablilityCounter();
+//RedPencil.item2.si2;
+
+  expect(RedPencil.item2.daysStable).toEqual(0);
+  //expect(RedPencil.item2.daysRPP).toEqual(-1);
+
+  jasmine.clock().tick(86400000);  //Advances clock 86400000 miliseconds
+  expect(RedPencil.item2.daysStable).toEqual(1);
+  //expect(RedPencil.item2.daysRPP).toEqual(1);
+
+ jasmine.clock().tick(1);  ////Advances clock another 1 milisecond
+  expect(RedPencil.item2.daysStable).toEqual(1);
+  //expect(RedPencil.item2.daysRPP).toEqual(1);
+
+  jasmine.clock().tick(86399998);  ////Advances clock another 86399998 miliseconds
+
+  expect(RedPencil.item2.daysStable).toEqual(1);
+//  expect(RedPencil.item2.daysRPP).toEqual(1);
+
+
+  jasmine.clock().tick(1);  ////Advances clock another 1 milisecond (for a total of 86400001 miliseconds)
+
+  expect(RedPencil.item2.daysStable).toEqual(2);
+  //expect(RedPencil.item2.daysRPP).toEqual(2);
+
+
+  jasmine.clock().tick(86400000);
+
+  expect(RedPencil.item2.daysStable).toEqual(3);
+  //expect(RedPencil.item2.daysRPP).toEqual(3);
+
+
+  RedPencil.item2.resetDayCounter();
+  RedPencil.item2.resetRPPCounter();
+
+  expect(sampleItem.daysStable).toEqual(3);
+  //expect(sampleItem.daysRPP).toEqual(3);
+
+  jasmine.clock().tick(100000000);
+  expect(sampleItem.daysStable).toEqual(3);
+  //expect(sampleItem.daysRPP).toEqual(3);
+});
+
+
+});*/
