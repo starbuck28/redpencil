@@ -132,3 +132,8 @@ var RedPencil = (function() {
     //Price increased
     //Price reduced more than 30%
     //RPP has lasted > 30 days
+
+//Issues to address:
+    //Need way to record whether price has been last increased or decreased in order to provide to isItARedPencilPromotion function for eval
+    //Need to change getNewPrice function so instead of adding cumulative percent it changes total percent off each time and adjusts values accordingly
+    //Need to refactor code to DRY!!
