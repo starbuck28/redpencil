@@ -60,7 +60,7 @@ var RedPencil = (function() {
         //If an item is already under a RPP
       } else if(item.rpp === "Y") {
         //If the item's new total percent off is still within 5 and 30%
-        if(item.percent >= 5 && item.percent <= 30) {
+        if(item.percent >= 5 && item.percent <= 30 && item.lastpricechange !== "up") {
           //Item qualifies to continue as a RPP
           item.rpp = "Y";
         } else {

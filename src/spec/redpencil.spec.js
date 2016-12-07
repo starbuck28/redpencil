@@ -62,6 +62,7 @@ describe("Red Pencil Promotions", function() {
     RedPencil.item1.percent = 20;
     RedPencil.item1.daysStable = 0;
     RedPencil.item1.rpp = 'Y';
+    RedPencil.item1.lastpricechange = "down";
     RedPencil.isItARedPencilPromotion(RedPencil.item1);
     expect(RedPencil.item1.rpp).toEqual('Y');
 
@@ -129,7 +130,7 @@ describe("Red Pencil Promotions", function() {
     expect(RedPencil.item1.currentprice).toEqual(19);
     expect(RedPencil.item1.percent).toEqual(5);
     expect(RedPencil.item1.lastpricechange).toEqual("up");
-    //expect(RedPencil.item1.rpp).toEqual("Y");
+    expect(RedPencil.item1.rpp).toEqual("N");
 
     RedPencil.item1.originalprice = 20;
     RedPencil.item1.currentprice = 16;
@@ -140,7 +141,7 @@ describe("Red Pencil Promotions", function() {
     expect(RedPencil.item1.currentprice).toEqual(15);
     expect(RedPencil.item1.percent).toEqual(25);
     expect(RedPencil.item1.lastpricechange).toEqual("down");
-    //expect(RedPencil.item1.rpp).toEqual("N");
+    expect(RedPencil.item1.rpp).toEqual("Y");
   });
 
   it("when a percent discount is applied, the number of days an item's price is stable is reset and priceStablilityCounter is started", function() {
