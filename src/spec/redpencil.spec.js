@@ -141,6 +141,8 @@ describe("Red Pencil Promotions", function() {
     expect(RedPencil.item1.daysStable).toEqual(0);
   });
   it("should be able to stop a sale, reset days price is stable, and stop a RPP", function() {
+    RedPencil.item1.originalprice = 20;
+    RedPencil.item1.currentprice = 16;
     RedPencil.item1.percent = 20;
     RedPencil.item1.sale = 'Y';
     RedPencil.item1.daysStable = 15;
@@ -150,6 +152,7 @@ describe("Red Pencil Promotions", function() {
     expect(RedPencil.item1.sale).toEqual('N');
     expect(RedPencil.item1.daysStable).toEqual(0);
     expect(RedPencil.item1.daysRPP).toEqual(-1);
+    expect(RedPencil.item1.currentprice).toEqual(20);
   });
 
 });

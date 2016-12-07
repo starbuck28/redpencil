@@ -111,6 +111,7 @@ var RedPencil = (function() {
     item.priceStablilityCounter();
     item.resetRPPCounter();
     item.resetDaysRPP();
+    item1.currentprice = item1.originalprice;
   }
 
   return {
