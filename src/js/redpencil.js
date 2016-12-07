@@ -44,6 +44,9 @@ var RedPencil = (function() {
     }
   };
 
+function Item() {
+
+}
   //Checks to see if item meets RPP parameters
   function isItARedPencilPromotion(item) {
     if(item.rpp === "N") {
@@ -132,20 +135,9 @@ var RedPencil = (function() {
     startOrStopSale: startOrStopSale,
     isItARedPencilPromotion: isItARedPencilPromotion,
     stopSale: stopSale,
-    percentUpOrDown: percentUpOrDown
+    percentUpOrDown: percentUpOrDown,
+    Item: Item
   };
 })();
 
-//Red Pencil Promotion:
-  //Triggered automatically when item price is reduced by 5-30%, price has been stable for 30 days, has not had RPP for those 30 days
-  //Price is set to be reduced for 30 days
-  //Can continue if price is further reduced to max of 30%, but time is not prolonged
-  //Ends if
-    //Price increased
-    //Price reduced more than 30%
-    //RPP has lasted > 30 days
-
-//Issues to address:
-    //Need way to record whether price has been last increased or decreased in order to provide to isItARedPencilPromotion function for eval
-    //Need to change getNewPrice function so instead of adding cumulative percent it changes total percent off each time and adjusts values accordingly
     //Need to refactor code to DRY!!

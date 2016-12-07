@@ -227,6 +227,8 @@ describe("Manually ticking the Jasmine Clock", function() {
       }
     };
 
+
+
     expect(timerCallback).not.toHaveBeenCalled();
     expect(timerCallback2).not.toHaveBeenCalled();
 
@@ -344,7 +346,7 @@ describe("Manually ticking the Jasmine Clock", function() {
     expect(sampleItem.daysRPP).toEqual(-1);
   });
 
-  /*it("when an item's percent off is changed, it should calculate item's current price, calculate total percent off, trigger check to see if it qualifies for a RPP, stop days stable timer, reset days stable, and start priceStablilityCounter", function() {
+  it("when an item's percent off is changed, it should calculate item's current price, calculate total percent off, trigger check to see if it qualifies for a RPP, stop days stable timer, reset days stable, and start priceStablilityCounter", function() {
     var sampleItem = {
       name: "Tshirt",          //item name
       originalprice: 20,      //item price in $
@@ -406,13 +408,13 @@ describe("Manually ticking the Jasmine Clock", function() {
 
     RedPencil.getNewPrice(sampleItem, 25);
 
-    expect(sampleItem.currentprice).toEqual(12);
-    expect(sampleItem.percent).toEqual(40);
+    expect(sampleItem.currentprice).toEqual(15);
+    expect(sampleItem.percent).toEqual(25);
     expect(sampleItem.sale).toEqual('Y');
-    expect(sampleItem.rpp).toEqual('N');
+    expect(sampleItem.rpp).toEqual('Y');
     expect(sampleItem.daysStable).toEqual(0);
-    expect(sampleItem.daysRPP).toEqual(-1);
+    expect(sampleItem.daysRPP).toEqual(15);
 
-  });*/
+  });
 
 });
