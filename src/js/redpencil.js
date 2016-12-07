@@ -16,11 +16,11 @@ var RedPencil = (function() {
 
     //Resets # of days price is stable
     resetDaysStable: function() {
-      item1.daysStable = -1;
+      item1.daysStable = -1;   //Default is -1 because counter increases variable by 1 initially before timing interval starts
     },
     //Resets # of days item has been under a RPP
     resetDaysRPP: function() {
-      item1.daysRPP = -1;
+      item1.daysRPP = -1;     //Default is -1 because counter increases variable by 1 initially before timing interval starts
     },
     //A counter that increases the number of days an item's price is stable every 24h
     priceStablilityCounter: function() {
