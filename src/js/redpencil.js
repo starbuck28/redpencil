@@ -2,21 +2,23 @@ var RedPencil = (function() {
 
   //Sample item for sale
   var item1 = {
-    name: "Tshirt",          //item name
-    originalprice: 20,      //item price in $
-    currentprice: 20,       //item price in $
-    rpp: "N",                //under red prencil promotion (Y/N)
-    sale: "N",               //on sale (Y/N)
-    percent: 0,
-    daysStable: -1,
-    daysRPP: -1,
-    st: 0,
-    st2: 0,
-    lastpricechange: "none",
+    name: "Tshirt",               //item name
+    originalprice: 20,            //item price in $
+    currentprice: 20,             //item price in $
+    rpp: "N",                     //under red prencil promotion (Y/N)
+    sale: "N",                    //on sale (Y/N)
+    percent: 0,                   //total percent discount
+    daysStable: -1,               //Number of days item's price has been stable
+    daysRPP: -1,                  //Number of days item has been under a Red Pencil Promotion
+    st: 0,                        //Placeholder for timer variable
+    st2: 0,                       //Placeholder for timer variable
+    lastpricechange: "none",      //Tracks whether last price was "up" or "down"
+
     //Resets # of days price is stable
     resetDaysStable: function() {
       item1.daysStable = -1;
     },
+    //Resets # of days item has been under a RPP
     resetDaysRPP: function() {
       item1.daysRPP = -1;
     },
@@ -26,6 +28,7 @@ var RedPencil = (function() {
       //Recursive method
       item1.st = setTimeout(item1.priceStablilityCounter, 86400000);
       },
+    //A counter that increases number of days an item has been under a RPP; automatically stops when reaches 30 days
     daysRPPCounter: function() {
       if(item1.daysRPP === 30) {
         item1.resetRPPCounter();
@@ -39,11 +42,19 @@ var RedPencil = (function() {
     resetDayCounter: function() {
       clearTimeout(item1.st);
     },
+    //Stops daysRPPCounter
     resetRPPCounter: function() {
       clearTimeout(item1.st2);
+    },
+
+    restartPriceStability: function() {
+      item1.resetDayCounter();
+      item1.resetDaysStable();
+      item1.priceStablilityCounter();
     }
   };
 
+//Constructor function for basic item
 function Item(name, originalprice, currentprice, rpp, sale, percent, daysStable, daysRPP, st, lastpricechange) {
   this.name = name;          //item name
   this.originalprice = originalprice;      //item price in $
@@ -57,20 +68,24 @@ function Item(name, originalprice, currentprice, rpp, sale, percent, daysStable,
   this.lastpricechange = lastpricechange;
 }
 
+//Resets # of days item's price has been stable
 Item.prototype.resetDaysStable = function() {
   this.daysStable = -1;
 }
 
+//Resets # days an item has been under a RPP
 Item.prototype.resetDaysRPP = function() {
   this.daysRPP = -1;
 }
 
+//Counts # days item's price has been stable
 Item.prototype.priceStablilityCounter = function() {
   this.daysStable += 1;
   //Recursive method
   this.st = setTimeout(this.priceStablilityCounter, 86400000);
   }
 
+//Counts number of days item has been under RPP; automatically stops counter when reaches 30 days
 Item.prototype.daysRPPCounter = function() {
   if(this.daysRPP === 30) {
     this.resetRPPCounter();
@@ -81,15 +96,17 @@ Item.prototype.daysRPPCounter = function() {
   this.st2 = setTimeout(this.daysRPPCounter, 86400000)
 }
 
-
+//Stops priceStablilityCounter
 Item.prototype.resetDayCounter = function() {
   clearTimeout(this.si);
 }
 
+//Stops daysRPPCounter
 Item.prototype.resetRPPCounter = function() {
   clearTimeout(this.si2);
 }
 
+//Creates a new Item with assorted parameters
 var item2 = new Item("Tshirt", 20, 20, "N", "N", 0, -1, -1, 0, 0, "none");
 
   //Checks to see if item meets RPP parameters
@@ -140,11 +157,6 @@ var item2 = new Item("Tshirt", 20, 20, "N", "N", 0, -1, -1, 0, 0, "none");
       item.priceStablilityCounter();
   }
 
-  //Calculates total percent off original price
-  function getTotalPercentOff(item) {
-    item.percent = (item.originalprice - item.currentprice) / (item.originalprice * 0.01)
-  }
-
   //Updates sale state (Y or N) based on item's percent off value
   function startOrStopSale(item) {
     if (item.percent > 0) {
@@ -154,17 +166,18 @@ var item2 = new Item("Tshirt", 20, 20, "N", "N", 0, -1, -1, 0, 0, "none");
     }
   }
 
+  //Stops sale if item's percent off is zero
   function stopSale(item) {
     item.percent = 0;
     item.sale = 'N';
-    item.resetDayCounter();
-    item.resetDaysStable();
-    item.priceStablilityCounter();
+    item.restartPriceStability();
+
     item.resetRPPCounter();
     item.resetDaysRPP();
     item1.currentprice = item1.originalprice;
   }
 
+  //Tracks whether item's price last went up or down
   function percentUpOrDown(item, percent) {
     if(item.percent < percent) {
         item.lastpricechange = "down";
@@ -173,10 +186,11 @@ var item2 = new Item("Tshirt", 20, 20, "N", "N", 0, -1, -1, 0, 0, "none");
     }
   }
 
+
+
   return {
     item1: item1,
     getNewPrice: getNewPrice,
-    getTotalPercentOff: getTotalPercentOff,
     startOrStopSale: startOrStopSale,
     isItARedPencilPromotion: isItARedPencilPromotion,
     stopSale: stopSale,

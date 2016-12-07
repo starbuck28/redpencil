@@ -18,14 +18,14 @@ describe("Red Pencil Promotions", function() {
       RedPencil.getNewPrice(RedPencil.item1, -10);
       expect(RedPencil.item1.currentprice).toEqual(22);
   });
-  it("should be able to calculate the total percentage difference between the original price and current price of item", function() {
+/*  it("should be able to calculate the total percentage difference between the original price and current price of item", function() {
     RedPencil.item1.currentprice = 20;
     RedPencil.getTotalPercentOff(RedPencil.item1);
     expect(RedPencil.item1.percent).toEqual(0);
     RedPencil.item1.currentprice = 15;
     RedPencil.getTotalPercentOff(RedPencil.item1);
     expect(RedPencil.item1.percent).toEqual(25);
-  });
+  });*/
   it("should be able to modify item sale key value pair based on item percent value", function() {
     RedPencil.item1.percent = 25;
     RedPencil.startOrStopSale(RedPencil.item1);
