@@ -55,7 +55,7 @@ var RedPencil = (function() {
   };
 
 //Constructor function for basic item
-function Item(name, originalprice, currentprice, rpp, sale, percent, daysStable, daysRPP, st, lastpricechange) {
+function Item(name, originalprice, currentprice, rpp, sale, percent, daysStable, daysRPP, st, st2, lastpricechange) {
   this.name = name;          //item name
   this.originalprice = originalprice;      //item price in $
   this.currentprice = currentprice;       //item price in $
@@ -65,6 +65,7 @@ function Item(name, originalprice, currentprice, rpp, sale, percent, daysStable,
   this.daysStable = daysStable;
   this.daysRPP = daysRPP;
   this.st = st;
+  this.st2 = st2;
   this.lastpricechange = lastpricechange;
 }
 
@@ -106,7 +107,7 @@ Item.prototype.resetRPPCounter = function() {
   clearTimeout(this.si2);
 }
 
-//Creates a new Item with assorted parameters
+//An example of a specific item that could be created from Item constructor function
 var item2 = new Item("Tshirt", 20, 20, "N", "N", 0, -1, -1, 0, 0, "none");
 
   //Checks to see if item meets RPP parameters
