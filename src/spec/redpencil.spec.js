@@ -90,6 +90,7 @@ describe("Red Pencil Promotions", function() {
     expect(RedPencil.item1.rpp).toEqual("N");
     expect(RedPencil.item1.currentprice).toEqual(19.6);
     expect(RedPencil.item1.percent).toEqual(2);
+    expect(RedPencil.item1.lastpricechange).toEqual("down");
 
     RedPencil.item1.originalprice = 20;
     RedPencil.item1.currentprice = 20;
@@ -100,6 +101,7 @@ describe("Red Pencil Promotions", function() {
     expect(RedPencil.item1.currentprice).toEqual(16);
     expect(RedPencil.item1.percent).toEqual(20);
     expect(RedPencil.item1.rpp).toEqual("Y");
+    expect(RedPencil.item1.lastpricechange).toEqual("down");
 
     RedPencil.item1.originalprice = 20;
     RedPencil.item1.currentprice = 20;
@@ -109,11 +111,13 @@ describe("Red Pencil Promotions", function() {
     RedPencil.getNewPrice(RedPencil.item1, 20);
     expect(RedPencil.item1.currentprice).toEqual(16);
     expect(RedPencil.item1.percent).toEqual(20);
+    expect(RedPencil.item1.lastpricechange).toEqual("down");
     expect(RedPencil.item1.rpp).toEqual("N");
 
     RedPencil.getNewPrice(RedPencil.item1, 20);
     expect(RedPencil.item1.currentprice).toEqual(16);
     expect(RedPencil.item1.percent).toEqual(20);
+    expect(RedPencil.item1.lastpricechange).toEqual("down");
     expect(RedPencil.item1.rpp).toEqual("N");
 
     RedPencil.item1.originalprice = 20;
@@ -124,6 +128,7 @@ describe("Red Pencil Promotions", function() {
     RedPencil.getNewPrice(RedPencil.item1, 5);
     expect(RedPencil.item1.currentprice).toEqual(19);
     expect(RedPencil.item1.percent).toEqual(5);
+    expect(RedPencil.item1.lastpricechange).toEqual("up");
     //expect(RedPencil.item1.rpp).toEqual("Y");
 
     RedPencil.item1.originalprice = 20;
@@ -134,6 +139,7 @@ describe("Red Pencil Promotions", function() {
     RedPencil.getNewPrice(RedPencil.item1, 25);
     expect(RedPencil.item1.currentprice).toEqual(15);
     expect(RedPencil.item1.percent).toEqual(25);
+    expect(RedPencil.item1.lastpricechange).toEqual("down");
     //expect(RedPencil.item1.rpp).toEqual("N");
   });
 

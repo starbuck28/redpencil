@@ -77,6 +77,9 @@ var RedPencil = (function() {
   //Calculates item's new current price based on percent off value
   function getNewPrice(item, percent) {
       item.currentprice = item.originalprice - (item.originalprice * percent * 0.01);
+      //Track whether price change is up or down
+      this.percentUpOrDown(item, percent);
+      //Update item's total percent off
       item.percent = percent;
       //Checks to see if item is on sale
       this.startOrStopSale(item);
