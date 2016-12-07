@@ -46,17 +46,26 @@ var RedPencil = (function() {
   //Checks to see if item meets RPP parameters
   function isItARedPencilPromotion(item) {
     if(item.rpp === "N") {
+      //If item's price has been stable x 30d and percent of is between 5 & 30%
       if(item.daysStable >= 30 && item.percent >= 5 && item.percent <= 30) {
+          //Item qualifies for RPP
           item.rpp = "Y";
+          //Start RPP counter
           item.daysRPPCounter();
         } else {
+          //Item does not qualify for RPP
           item.rpp = "N";
         }
+        //If an item is already under a RPP
       } else if(item.rpp === "Y") {
+        //If the item's new total percent off is still within 5 and 30%
         if(item.percent >= 5 && item.percent <= 30) {
+          //Item qualifies to continue as a RPP
           item.rpp = "Y";
         } else {
+          //Otherwise the item stops being a RPP
           item.rpp = "N";
+          //RPP counter is stopped and reset
           item.resetRPPCounter();
           item.resetDaysRPP();
         }

@@ -2,6 +2,14 @@ describe("Red Pencil Promotions", function() {
   it("should be defined", function () {
     expect(RedPencil.item1).toBeDefined();
   });
+  it("should be able to tell if an item is on sale or not", function() {
+    RedPencil.item1.percent = 0;
+    RedPencil.startOrStopSale(RedPencil.item1);
+    expect(RedPencil.item1.sale).toEqual('N');
+    RedPencil.item1.percent = 10;
+    RedPencil.startOrStopSale(RedPencil.item1);
+    expect(RedPencil.item1.sale).toEqual('Y');
+  });
   it("should be able to determine a sale price when a percentage discount is applied", function() {
     RedPencil.getNewPrice(RedPencil.item1, 15);
     expect(RedPencil.item1.currentprice).toEqual(17);
