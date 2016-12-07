@@ -78,6 +78,8 @@ var RedPencil = (function() {
       item.currentprice -= item.currentprice * percent * 0.01;
       //Calculates total percent off
       this.getTotalPercentOff(item);
+      //Checks to see if item is on sale
+      this.startOrStopSale(item);
       //Checks to see if it qualifies for RPP
       this.isItARedPencilPromotion(item);
       //Resets daysStable

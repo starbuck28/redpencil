@@ -357,6 +357,7 @@ describe("Manually ticking the Jasmine Clock", function() {
     RedPencil.getNewPrice(sampleItem, 20);
     expect(sampleItem.currentprice).toEqual(16);
     expect(sampleItem.percent).toEqual(20);
+    expect(sampleItem.sale).toEqual('Y');
     expect(sampleItem.rpp).toEqual('Y');
     expect(sampleItem.daysStable).toEqual(0);
     expect(sampleItem.daysRPP).toEqual(0);
@@ -365,6 +366,7 @@ describe("Manually ticking the Jasmine Clock", function() {
 
     expect(sampleItem.currentprice).toEqual(16);
     expect(sampleItem.percent).toEqual(20);
+    expect(sampleItem.sale).toEqual('Y');
     expect(sampleItem.rpp).toEqual('Y');
     expect(sampleItem.daysStable).toEqual(15);
     expect(sampleItem.daysRPP).toEqual(15);
@@ -373,6 +375,7 @@ describe("Manually ticking the Jasmine Clock", function() {
 
     expect(sampleItem.currentprice).toEqual(12);
     expect(sampleItem.percent).toEqual(40);
+    expect(sampleItem.sale).toEqual('Y');
     expect(sampleItem.rpp).toEqual('N');
     expect(sampleItem.daysStable).toEqual(0);
     expect(sampleItem.daysRPP).toEqual(-1);
